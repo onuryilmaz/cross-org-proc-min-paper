@@ -87,6 +87,11 @@ pdfpagelayout=SinglePage
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
+% Turkish packages
+\usepackage[turkish]{babel}
+\usepackage[latin5]{inputenc}
+\usepackage[T1]{fontenc}
+
 \begin{document}
 
 %Works on MiKTeX only
@@ -101,10 +106,11 @@ pdfpagelayout=SinglePage
 %\titlerunning{Short Title}
 
 %Single insitute
-\author{Onur Y{\i}lmaz \and P{\i}nar Karag{\''{o}}z}
+\author{Onur Yılmaz \and Pınar Karagöz}
 %If there are too many authors, use \authorrunning
 %\authorrunning{First Author et al.}
-\institute{Computer Engineering Department, Middle East Technical University, Turkey}
+\institute{Computer Engineering Department, Middle East Technical University, Turkey\\
+yilmaz.onur@metu.edu.tr \and karagoz@ceng.metu.edu.tr}
 %\email{yilmaz.onur@metu.edu.tr} 
 %\email{karagoz@ceng.metu.edu.tr}
 %Multiple insitutes
