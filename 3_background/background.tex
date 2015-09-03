@@ -1,0 +1,15 @@
+\section{Background}
+\label{sec:background}
+
+In this section background information is presented for the relevant topics to this thesis study. Process discovery approaches and then performance analysis methodologies are presented.Finally, mismatch patterns in process models are presented. All topics in this chapter are limited to the scope of this thesis study with the aim of constructing a necessary background.
+
+\subsection{Process Discovery}
+\label{subsec:process-discovery}
+In process mining field, one of the most challenging tasks is to construct a process model based on the behavior in the event logs, namely process discovery. Many process discovery algorithms are proposed to address different challenges in process discovery and using different notations. However, in this study focus of the study is learning from the cross-organizational process mining rather than addressing all process discovery challenges. With this reasoning, Inductive Process Mining \cite{leemans2013discovering} is selected as appropriate since it is simple, highly applicable and configurable. In the literature, its derivatives which handles infrequent behaviors \cite{leemans2014discoveringinfrequent}; incomplete logs \cite{leemans2014discoveringincomplete}; and model optimization \cite{weidlich2012profiles} are also available. \textit{Inductive Miner Infrequent (IMi)} \cite{leemans2014discoveringinfrequent} extension is capable of handling noise in the event logs. By filtering the infrequent behavior, it is aimed that \textit{IMi} succeeds with improved models discovered. After each recursive step of \textit{IM}, filtering is applied if the discovered model is a flower model which represents infrequent behavior. Basic idea behind filtering is setting a user-defined threshold between 0 to 1 and with the help of this threshold, both log splittings and mining operations are done on a cleaner subset of logs. When the discovered models compared to \textit{IM}, \textit{IMi} results with lower fitness, higher precision and equal generalization.
+
+
+\subsection{Process Performance Analysis}
+\label{subsec:process-performance-analysis}
+
+\subsection{Mismatch Patterns in Process Models}
+\label{subsec:mismatch-patterns-in-process-models}
