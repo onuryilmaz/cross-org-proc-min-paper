@@ -1,0 +1,20 @@
+\section{Results and Discussions}
+\label{sec:results-and-discussions}
+
+In this section, methodology presented in this study is applied on datasets and results are presented. Firstly, evaluation metrics are defined for each stage of methodology to assess the performance of approach. Following this, methodology is applied on two datasets and results are explained with discussions.
+
+Approach in this study is an aggregation of various methods and they are significantly different from each other in their mathematical background. Therefore, instead of a global evaluation metric for the complete methodology, each stage will be evaluated within its evaluation metrics. Since these stages are executed sequentially, it is important for each stage to perform well enough to yield a successful outcome. Evaluation metrics for each stage are as follows:
+
+\begin{description}
+	\item[Process Model Mining] Performance of process mining stage is measured by \textit{Fitness} and \textit{Appropriateness} which are defined in \cite{rozinat2008conformance}.
+	\item[Performance Indicator Analysis] In replay phase, \textit{alignment costs} \cite{van2012replaying}  are compared with process model mining metrics. In clustering phase, within-SSE analysis is undertaken to decide on the number of clusters.
+	\item[Mismatch Pattern Analysis] In this stage, number of mismatch patterns found are compared with the \textit{graph-edit similarity} \cite{dijkman2011similarity} of process models.
+	\item[Recommendation Generation] In recommendation generation, different threshold values are tried to check how many mismatch patterns are generated for organizations and how they could be used for focused analysis.
+\end{description}
+
+Cross-organizational mining aims to find cross-correlation of workflows and activities in different organizations and this yields the necessity of organizations that do the same main activity with comparable process flows. Considering these characteristics, there are few dataset available in the literature that are well-structured, documented and valuable. In this thesis study, one synthetic and one real-life event log datasets are presented and used in the following sections to evaluate the performance of the proposed methodology.
+
+\begin{description}
+  \item[Loan Application Process \cite{loan-app-data}] This synthetically created dataset consists of event log variants of a simple loan application in a financial institute. This dataset includes artificial event logs of 4 variants where each variant includes different sets of approaches such as parallelism, choices and sequential tasks. These event logs are used to test different approaches of discovering a configurable process model from a collection of event logs \cite{buijs2014flexible}.
+  \item[Environmental Permit Application Process \cite{coselog-data}] This dataset originates from the "Configurable Services for Local Governments (CoSeLoG)" project \cite{van2011business} which investigates the similarities and dissimilarities between several processes of different municipalities in Netherlands. Dataset contains records of receiving phase for the building permit application process in 5 municipalities, which are comparable since activity labels in the different event logs refer to the same activities performed in five municipalities. This dataset is also mentioned in the literature as \textit{"Processing applications for building and/or environmental permits (Wet Algemene Bepalingen omgevingsrecht (WABO) in Dutch)"}.
+\end{description}
