@@ -12,3 +12,27 @@ The approach proposed in this study consists of four main stages visualized in F
   \caption{Overview of Methodology}
   \label{fig:approach-overview}
 \end{figure}
+
+\subsection{Process Model Mining}
+\label{subsec:process-model-mining}
+Process model mining in the proposed approach has the aim of creating reproducible and generalized process models from event logs. In order to achieve this aim, implementation of \textit{Inductive Miner Infrequent (IMi)}, which is proposed in \cite{leemans2014discoveringinfrequent} as an extension to \textit{Inductive Miner} to handle noise in the event logs, is used in this study. Considering the scope of this study, instead of computational details of \textit{Inductive Miner Infrequent (IMi)}; black-box representation is used to explain its usage in the methodology. In order to set a filtering threshold, a user-provided value between 0 to 1 is added as input to method in addition to event logs. As a result, workflow net is produced which is a sound and properly completed Petri net without deadlocks. Black-box of this stage is illustrated in Figure~\ref{fig:process-model-mining-blackbox} and this stage is called for every organization's event logs to create their own process models in Workflow net formalization.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{4_methodology/process-model-mining-blackbox}
+  \caption{Process Model Mining Stage as Black-box }
+  \label{fig:process-model-mining-blackbox}
+\end{figure}
+
+\subsection{Performance Indicator Analysis}
+\label{subsec:performance-indicator-analysis}
+Performance indicator analysis stage focuses on calculating and analyzing the performance values using the event logs and mined process models. This stage consists of mainly two concepts as 
+\begin{inparaenum}[\itshape a\upshape)]
+\item alignment and calculation of performance indicators; and
+\item clustering of organizations based on their performance values.
+\end{inparaenum}
+In order to evaluate the performance of an organization based on their process models and past activities; there is a number of indicators in time dimension, cost dimension and utilization \cite{van2011process}. However, in this study, process related performance values are considered since differences in the process models are studied in the next stages. With this reasoning, the following performance indicators are calculated and analyzed in this stage of methodology:
+\begin{description}
+	\item[Average Time Between Activities] For each activity in the process model, average time to reach other activity is calculated. This is a simple but powerful performance metric for organizations since it can yield the average time to complete one task based on a starting point. From the performance perspective, organizations want to minimize average time between activities to increase their throughput \cite{van2012replaying}.
+	\item[Standard Deviation of Time Between Activities] Time between activities in real life is not stable and they deviate due to various reasons such as people responsible of tasks, size and the content of tasks or seasonality \cite{van2011process}. On the other hand, organizations want to be confident about their processes and therefore they want to minimize the deviation in the time between activities. Minimized deviation in time helps organizations to plan, act and re-organize the activities in the processes with high accuracy \cite{van2012replaying}. 
+\end{description}
