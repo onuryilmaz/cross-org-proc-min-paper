@@ -7,7 +7,7 @@
   \item In \textit{Performance Indicator Analysis} stage, firstly event logs are replayed over process models and performance indicators are calculated and then organizations are clustered based on their performance indicators. In order to avoid overfitting,  with two clusters, Variant \#1, \#2, and \#4 are grouped into one cluster where only Variant \#3 is left to other cluster. 
   \item In \textit{Mismatch Pattern Analysis} stage, number of mismatch patterns are analyzed with the \textit{graph-edit similarity} between each two organization. As the similarity between process models decreases our method spots more mismatch patterns and it ensures that the developed mismatch pattern analyzers work as expected for this dataset. 
   \item In \textit{Recommendation Generation} stage, for different threshold values, number of performance indicators that are performing better for the selected organization and spotted mismatch patterns are plotted in Figure~\ref{fig:loan-recommendation-generation-analysis}. 
-    \begin{figure}
+    \begin{figure}[t!]
     	\centering
     	\includegraphics[width=\textwidth]{5_results_discussions/loan-application-process/recommendation-generation-analysis}
     	\caption{Recommendation Generation analysis for Loan Application Process dataset}
