@@ -31,17 +31,56 @@ Performance indicator analysis stage focuses on calculating and analyzing the pe
 \end{inparaenum}
 In order to evaluate the performance of an organization based on their process models and past activities; there is a number of indicators in time dimension, cost dimension and utilization \cite{van2011process}. However, in this study, process related performance values are considered since differences in the process models are studied in the next stages. To this aim, the following performance indicators are calculated and analyzed in this stage of methodology:
 \begin{description}
-	\item[Average Time Between Activities] For each activity in the process model, average time to reach the next activity is calculated. This is a simple but powerful performance metric for organizations since it can yield the average time to complete one task based on a starting point. From the performance perspective, organizations want to minimize average time between activities to increase their throughput \cite{van2012replaying}.
-	\item[Standard Deviation of Time Between Activities] Time between activities in real life is not stable and they deviate due to various reasons such as the user responsible of tasks, size and the content of tasks or seasonality \cite{van2011process}. On the other hand, organizations want to be confident about their processes and therefore they want to minimize the deviation in the time between activities. Minimized deviation in time helps organizations to plan, act and re-organize the activities in the processes with high accuracy \cite{van2012replaying}. 
+	\item[Average Time Between Activities] For each activity in the process model, average time to reach the next activity is calculated. This is a simple but powerful performance metric for organizations since it can yield the average time to complete one task based on a starting point. From the performance perspective, organizations want to minimize average time between activities to increase their throughput \cite{van2012replaying}. This notion can be defined as follows:
+  \theoremstyle{definition}
+  \begin{definition}{}
+  Average time between activity $A$ and $B$ in organization $i$ is $AvgTime_{A\rightarrow B}^{i} = \frac{\sum_{Case\ c \in Event Log_{i}} TimeBetween_{c}(A,B)}{|Occurences_{Event\ Log_{i}}(A,B)|}$ where
+    \begin{enumerate}
+      \item $TimeBetween_{c}(A, B) = EndTime_{c}(B) - StartTime_{c}(A)$
+      \item $StartTime_{c}(A)$ is start time of activity $A$ in case $c$,
+      \item $EndTime_{c}(B)$ is end time of activity $B$ in case $c$,
+      \item $|Occurences_{Event Log_{i}}(A, B)|$ is number of occurrences of activity $A$ followed by $B$ in  $Event\ Log_{i}$.
+    \end{enumerate}
+  \end{definition}
+	\item[Standard Deviation of Time Between Activities] Time between activities in real life is not stable and they deviate due to various reasons such as the user responsible of tasks, size and the content of tasks or seasonality \cite{van2011process}. On the other hand, organizations want to be confident about their processes and therefore they want to minimize the deviation in the time between activities. Minimized deviation in time helps organizations to plan, act and re-organize the activities in the processes with high accuracy \cite{van2012replaying}. With the same approach above, the following formulation can be defined:
+  \theoremstyle{definition}
+  \begin{definition}{}
+  Standard deviation time between activity $A$ and $B$ in organization $i$ is $StdDevTime_{A\rightarrow B}^{i} = \sqrt{\frac{\sum_{Case\ c \in Event Log_{i}} [TimeBetween_{c}(A, B) - AvgTime_{A\rightarrow B}^{i}]^{2}}{Occurences_{Event\ Log_{i}}(A,B)} }$ 
+  \end{definition}
 \end{description}
 
 \subsubsection{Replay and Performance Indicator Calculation}
 \label{subsubsec:replay-and-performance-summary}
-Replay of event logs on process models is based on the idea of \textit{alignment} which is formalized in \cite{van2012replaying} and the basic assumption in this concept is that process models and event logs have the same activity labels. For each organization, the steps of alignment and creating transitions are performed with the corresponding event logs and process models; and the resulting process summaries are used for further analysis.
+Replay of event logs on process models is based on the idea of \textit{alignment} which is formalized in \cite{van2012replaying} and the basic assumption in this concept is that process models and event logs have the same activity labels. For each organization, the steps of alignment and creating transitions are performed with the corresponding event logs and process models; and the resulting process performance summaries are used for further analysis. Resulting data can be defined as follows:
+  \theoremstyle{definition}
+  \begin{definition}{} Performance Summary data for any organization $i$ is $PerfSum_{i}= \{AvgTimeSum_{i}\ \cup\ StdDevTimeSum_{i}\}$ where
+    \begin{enumerate}
+      \item $AvgTimeSum_{i} = \{ AvgTime_{A \rightarrow B}^{i} | A , B  \in Event\ Log_{i}\}$
+      \item $StdDevTimeSum_{i} = \{ StdDevTime_{ A\rightarrow B}^{i} | A, B  \in Event\ Log_{i}\}$
+    \end{enumerate}
+  \end{definition}
 
 \subsubsection{Performance Indicator Clustering}
 \label{subsubsec:performance-indicator-clustering}
-Clustering is based on the idea of collecting the set of observations into clusters so that observations within the same cluster are similar whereas the observations from different clusters are dissimilar. In this study, clustering is used to gather organizations based on their performance indicator data. In this research, random initialization based \textit{k-means++} approach from the study of Arthur and Vassilvitskii \cite{arthur2007} is used to cluster organizations. Since the number of clusters are not known priori, k-means clustering is applied starting \textit{k} from 1 to the number of organizations. For each clustering with different number of clusters, \textit{Sum of Squared Error (SSE)} values are plotted and user is asked to select the appropriate cluster size. For the selected cluster size, clustering related information is used to generate recommendations in the further steps. This stage of methodology can be visualized as an input-output system in Figure~\ref{fig:performance-indicator-clustering-blackbox}. 
+Clustering is based on the idea of collecting the set of observations into clusters so that observations within the same cluster are similar whereas the observations from different clusters are dissimilar. In this study, clustering is used to gather organizations based on their performance indicator data. In this research, random initialization based \textit{k-means++} approach from the study of Arthur and Vassilvitskii \cite{arthur2007} is used to cluster organizations. Since the number of clusters are not known priori, k-means clustering is applied starting \textit{k} from 1 to the number of organizations. For each clustering with different number of clusters, \textit{Sum of Squared Error (SSE)} values are plotted and user is asked to select the appropriate cluster size. For the selected cluster size, clustering related information is used to generate recommendations in the further steps. Resulting cluster analysis data is formulated as follows:
+
+\theoremstyle{definition}
+\begin{definition}
+Cluster Analysis Data is a tuple $(k, Assignments, Cluster\ Centroids)$ where
+\begin{enumerate}
+  \item $k$ is the number of clusters,
+  \item $Assignments$ is a set of tuple $(Organization_{i}, Cluster_{j})$ where $i$ is identifier for organization and $j \leq k$ is identifier for cluster,
+  \item $Cluster\ Centroids$ is a set of tuple $(Cluster_{j}, Type, A_{start}, A_{end}, Value)$ where
+    \begin{enumerate}
+      \item $Type$ is performance indicator type which is $Average$ or $StandardDev$,
+      \item $A_{start}$ and $A_{end}$ are starting and ending points of performance indicator,
+      \item $Value$ is the actual value of performance indicator,
+      \item $Cluster\ Centroids_{j}$ is a function that returns a set of $Centroid$ which is a tuple $(Type, A_{start}, A_{end}, Value)$ for $Cluster_{j}$.
+    \end{enumerate} 
+\end{enumerate}
+\end{definition}
+
+This stage of methodology can be visualized as an input-output system in Figure~\ref{fig:performance-indicator-clustering-blackbox}. 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{4_methodology/performance-indicator-clustering-blackbox}
@@ -51,7 +90,23 @@ Clustering is based on the idea of collecting the set of observations into clust
 
 \subsection{Mismatch Pattern Analysis}
 \label{subsec:mismatch-pattern-analysis}
-In order to learn from other organizations, it is necessary to spot the differences between process models of different organizations. In this phase, differences between process models will be revealed by the mismatch patterns which are defined by Dijkman \cite{dijkman2007mismatch}. In the process mining stage, process models are mined to create Workflow nets; however, mismatch pattern definitions are closer to business environment and it is more suitable spot patterns in BPMN notation. Thus, mined process models are converted to BPMN models and then mismatch pattern analysis is applied in order to locate the differences between two process models or two clusters of process models. In addition, since performance indicators are calculated based on a starting and ending point in the process model, the same approach is applied to locate mismatch patterns. In other words, differences of process models are located through a starting activity to an ending activity. For each organization, mismatch patterns are gathered and stored for the further analysis as visualized in Figure~\ref{fig:mismatch-pattern-analysis-blackbox}.
+In order to learn from other organizations, it is necessary to spot the differences between process models of different organizations. In this phase, differences between process models will be revealed by the mismatch patterns which are defined by Dijkman \cite{dijkman2007mismatch}. In the process mining stage, process models are mined to create Workflow nets; however, mismatch pattern definitions are closer to business environment and it is more suitable spot patterns in BPMN notation. Thus, mined process models are converted to BPMN models and then mismatch pattern analysis is applied in order to locate the differences between two process models or two clusters of process models. In addition, since performance indicators are calculated based on a starting and ending point in the process model, the same approach is applied to locate mismatch patterns. In other words, differences of process models are located through a starting activity to an ending activity. With this aim, each mismatch pattern and its analyzers are defined by extending the following definitions:
+\theoremstyle{definition}
+    \begin{definition}
+    Mismatch Pattern is a tuple ${Mismatch\ Patten} = (O_{1}, O_{2}, ExtensionData, A_{start}, A_{end}) $ where 
+    \begin{enumerate}
+      \item $O_{1}$ is the first organization and \item $O_{2}$ is the second organization in between the pattern occurs,
+      \item $ExtensionData$ is a set of tuples where mismatch related information is recorded, 
+      \item $A_{start}$ and $A_{end}$ are starting and ending points to check mismatch patterns.
+    \end{enumerate}
+    \end{definition}
+
+    \theoremstyle{definition}
+    \begin{definition}
+    Mismatch Pattern Analyzer is a function $MismatchPatternAnalyzer(O_{1}, O_{2}, A_{start}, A_{end})$ and it returns a set of \textit{Mismatch Pattern} for the organization $O_{1}$ compared to $O_{2}$ for the activities between $A_{start}$ and $A_{end}$.
+    \end{definition}
+
+For each organization, mismatch patterns are gathered and stored for the further analysis as visualized in Figure~\ref{fig:mismatch-pattern-analysis-blackbox}.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{4_methodology/mismatch-pattern-analysis-blackbox}
@@ -61,9 +116,53 @@ In order to learn from other organizations, it is necessary to spot the differen
 
 \subsection{Genarating Suggestions/Recommendations for Performance Improvement}
 \label{subsec:recommendation-generation}
-Recommendation generation stage in the methodology is the final and core stage where all information retrieved from the event logs until now are utilized. In this study, idea of recommendation is based on providing a set of mismatch patterns for each organization so that they can enhance their processes. These mismatch patterns are generated by comparing the process models of other organizations, particularly those that are performing better in terms of their performance indicator values. In addition, clustering of organizations is undertaken to generalize the way of identifying which organizations perform better in this environment.
+Recommendation generation stage in the methodology is the final and core stage where all information retrieved from the event logs until now are utilized. In this study, idea of recommendation is based on providing a set of mismatch patterns for each organization so that they can enhance their processes. These mismatch patterns are generated by comparing the process models of other organizations, particularly those that are performing better in terms of their performance indicator values. In addition, clustering of organizations is undertaken to generalize the way of identifying which organizations perform better in this environment. Recommendation idea and recommendation generation function is defined as following:
+\theoremstyle{definition}
+\begin{definition}
+Recommendation is a tuple ${Recommendation} = (O, A_{start}, A_{end}, Mismatch\ Patterns) $ where 
+  \begin{enumerate}
+    \item $O$ is identifier for organization,
+    \item $A_{start}$ and $A_{end}$ are starting and ending activities in between the recommendations are checked,
+    \item $Mismatch\ Patterns$ is collection of mismatch patterns.
+  \end{enumerate}
+\end{definition}
 
-Algorithm of recommendation generation function is based on the idea of checking other clusters for a significant change in performance indicators, where significance is defined by the threshold provided by user. After finding significant difference, all organizations in other clusters are checked against mismatch patterns with the starting and ending activities defined in performance indicators. Only mismatches which are located between the activities that causes high level of difference in performance indicators are analyzed. 
+\theoremstyle{definition}
+\begin{definition}
+Recommendation generation is a function that is $RecGen(O, C, P)$ and it returns a set of $Recommendation$ where
+  \begin{enumerate}
+    \item $O$ is identifier for organization,
+    \item $C$ is \textit{Cluster Analysis Data} which is result of cluster analysis stage,
+    \item $P$ is \textit{Performance Threshold} which is a real number larger than or equal to 0 and it is calculated over the same type of performance indicators of different organizations in \textit{Cluster Analysis Data}.
+  \end{enumerate}
+\end{definition}
+
+Algorithm of recommendation generation function is based on the idea of checking other clusters for a significant change in performance indicators, where significance is defined by the threshold provided by user. After finding significant difference, all organizations in other clusters are checked against mismatch patterns with the starting and ending activities defined in performance indicators. Only mismatches which are located between the activities that causes high level of difference in performance indicators are analyzed. This approach is formalized in Algorithm~\ref{algo:recgen}.
+ \begin{algorithm}
+\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead 
+\KwIn{$O$ organization, $C$ Cluster Analysis Data, $P$ performance difference threshold}
+\KwOut{$Recommendations$ a set of recommendations}
+$Recommendations \leftarrow \{\}$ \;
+$i \leftarrow C(Assignments(O))$ \;
+\For{$Centroid \in C(Cluster Centroids_{i})$} { 
+  \For{$Centroid' \in C(Cluster Centroids_{j})\ i\neq j$} { 
+    \If{$Centroid(A_{start}) = Centroid'(A_{start})\ \&\ Centroid(A_{end}) = Centroid'(A_{end})$} {
+      \If{ ($\left |  Centroid(Value) -  Centroid'(Value)\right | \div Centroid(Value)) \geq P$  } {
+        $A_{start} \leftarrow Centroid(A_{start})$ \;
+        $A_{end} \leftarrow Centroid(A_{end})$ \;
+        $MismatchPatterns \leftarrow \{\}$ \;
+        \For{$O' \in C(Assignments(j))$} {
+          $MismatchPatterns$ \leftarrow  Mismatch Pattern Analysis($O$,$O'$,$A_{start}$,$A_{end}$) \;
+        }
+        $Recommendations$ \leftarrow  Recommendation($O$,$A_{start}$,$A_{end}$, $MismatchPatterns$) \;
+      }
+    }
+  }
+}
+\Return{$Recommendations$} \;
+\caption{Recommendation Generation}
+\label{algo:recgen}
+\end{algorithm}
 
 This stage of methodology can be visualized as gathering inputs of mismatch patterns data and cluster analysis data in Figure~\ref{fig:recommendation-generation-blackox}. In addition, a performance difference threshold is gathered from the user to specify how much difference between clusters is necessary to check for mismatch patterns and generate recommendations. This stage generates recommendation data for each organization that contains a set of mismatch patterns.
 \begin{figure}
