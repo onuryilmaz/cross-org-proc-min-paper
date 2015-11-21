@@ -75,7 +75,7 @@ Cluster Analysis Data is a tuple $(k, Assignments, Cluster\ Centroids)$ where
 
 \subsection{Mismatch Pattern Analysis}
 \label{subsec:mismatch-pattern-analysis}
-In order to learn from other organizations, it is necessary to spot the differences between process models of different organizations. In this phase, differences between process models will be revealed by the mismatch patterns which are defined by Dijkman \cite{dijkman2007mismatch}. Since performance indicators are calculated based on a starting and ending point in the process model, the same approach is applied to locate mismatch patterns. In other words, differences of process models are located through a starting activity to an ending activity. With this aim, each mismatch pattern and its analyzers are defined by extending the following definitions:
+In order to learn from other organizations, it is necessary to spot the differences between process models of different organizations. In this phase, differences between process models will be revealed by the mismatch patterns which are defined by Dijkman \cite{dijkman2007mismatch}. Since performance indicators are calculated based on a starting and ending point in the process model, the same approach is applied to locate mismatch patterns. In other words, differences of process models are located through a starting activity to an ending activity. With this aim, each mismatch pattern and its analyzers are defined by extending the following definitions. For each organization, mismatch pattern analyzers are pipelined and mismatch patterns are stored for further analysis.
 \theoremstyle{definition}
     \begin{definition}
     Mismatch Pattern is a tuple ${Mismatch\ Patten} = (O_{1}, O_{2}, ExtensionData, A_{start}, A_{end}) $ where 
@@ -90,14 +90,6 @@ In order to learn from other organizations, it is necessary to spot the differen
 \begin{definition}
     Mismatch Pattern Analyzer is a function $MismatchPatternAnalyzer(O_{1}, O_{2}, A_{start}, A_{end})$ and it returns a set of \textit{Mismatch Pattern} for the organization $O_{1}$ compared to $O_{2}$ for the activities between $A_{start}$ and $A_{end}$.
 \end{definition}
-
-For each organization, mismatch patterns are gathered and stored for the further analysis as visualized in Figure~\ref{fig:mismatch-pattern-analysis-blackbox}.
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{4_methodology/mismatch-pattern-analysis-blackbox}
-  \caption{Mismatch Pattern Analysis Stage as Black-box}
-  \label{fig:mismatch-pattern-analysis-blackbox}
-\end{figure}
 
 \subsection{Genarating Suggestions/Recommendations for Performance Improvement}
 \label{subsec:recommendation-generation}
