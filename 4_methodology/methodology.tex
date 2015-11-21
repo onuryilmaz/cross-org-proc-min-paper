@@ -23,9 +23,9 @@ Performance indicator analysis stage focuses on calculating and analyzing the pe
 \item alignment and calculation of performance indicators; and
 \item clustering of organizations based on their performance values.
 \end{inparaenum}
-In order to evaluate the performance of an organization based on their process models and past activities; there is a number of indicators in time dimension, cost dimension and utilization \cite{van2011process}. However, in this study, process related performance values are considered since differences in the process models are studied in the next stages. To this aim, the following performance indicators are calculated and analyzed in this stage of methodology:
+In order to evaluate the performance of an organization based on their process models and past activities; there is a number of indicators in time dimension, cost dimension and utilization \cite{van2011process}. However, in this study, process related performance values are considered since differences in the process models are studied in the next stages. To this aim, the following performance indicators are calculated:
 \begin{description}
-	\item[Average Time Between Activities] For each activity in the process model, average time to reach the next activity is calculated. This is a simple but powerful performance metric for organizations since it can yield the average time to complete one task based on a starting point. From the performance perspective, organizations want to minimize average time between activities to increase their throughput \cite{van2012replaying}. This notion can be defined as follows:
+	\item[Average Time Between Activities] This is a simple but powerful performance metric for organizations since it can yield the average time to complete one task based on a starting point. From the performance perspective, organizations want to minimize average time between activities to increase their throughput \cite{van2012replaying}. This notion can be defined as follows:
   \theoremstyle{definition}
   \begin{definition}{}
   Average time between activity $A$ and $B$ in organization $i$ is $AvgTime_{A\rightarrow B}^{i} = \frac{\sum_{Case\ c \in Event Log_{i}} TimeBetween_{c}(A,B)}{|Occurences_{Event\ Log_{i}}(A,B)|}$ where
@@ -86,7 +86,6 @@ In order to learn from other organizations, it is necessary to spot the differen
     \end{enumerate}
     \end{definition}
 \theoremstyle{definition}
-
 \begin{definition}
     Mismatch Pattern Analyzer is a function $MismatchPatternAnalyzer(O_{1}, O_{2}, A_{start}, A_{end})$ and it returns a set of \textit{Mismatch Pattern} for the organization $O_{1}$ compared to $O_{2}$ for the activities between $A_{start}$ and $A_{end}$.
 \end{definition}
@@ -114,7 +113,7 @@ Recommendation generation is a function that is $RecGen(O, C, P)$ and it returns
   \end{enumerate}
 \end{definition}
 
-Algorithm of recommendation generation function is based on the idea of checking other clusters for a significant change in performance indicators, where significance is defined by the threshold provided by user. After finding significant difference, all organizations in other clusters are checked against mismatch patterns with the starting and ending activities defined in performance indicators. Only mismatches which are located between the activities that causes high level of difference in performance indicators are analyzed. This approach is formalized in Algorithm~\ref{algo:recgen}.
+Algorithm of recommendation generation function is based on the idea of checking other clusters for a significant change in performance indicators, where significance is defined by the threshold provided by user. Only mismatches which are located between the activities that causes high level of difference in performance indicators are analyzed. This approach is formalized in Algorithm~\ref{algo:recgen}.
  \begin{algorithm}
 \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead 
 \KwIn{$O$ organization, $C$ Cluster Analysis Data, $P$ performance difference threshold}
