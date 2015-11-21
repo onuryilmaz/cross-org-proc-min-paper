@@ -3,13 +3,7 @@
 
 In this section, methodology presented in this study is applied on several data sets and results are presented. Firstly, evaluation metrics are defined for each stage of methodology to assess the performance of approach. Following this, methodology is applied on two data sets and results are explained with discussions.
 
-Approach in this study is an aggregation of various methods and they are significantly different from each other in their mathematical background. Therefore, instead of a global evaluation metric for the complete methodology, each stage is evaluated within its evaluation metrics which are as follows:
-\begin{description}
-	\item[Process Model Mining] Performance of process mining stage is measured by \textit{fitness} and \textit{appropriateness} which are defined in \cite{rozinat2008conformance}.
-	\item[Performance Indicator Analysis] In replay phase, \textit{alignment costs} \cite{van2012replaying} are compared with process model mining metrics. In clustering phase, \textit{within-SSE} analysis is undertaken to decide on the number of clusters.
-	\item[Mismatch Pattern Analysis] In this stage, number of mismatch patterns found are compared with the \textit{graph-edit similarity} \cite{dijkman2011similarity} of process models.
-	\item[Recommendation Generation] In recommendation generation, different threshold values are tried to check how many mismatch patterns are generated for organizations and how they could be used for focused analysis.
-\end{description}
+Approach in this study is an aggregation of various methods and they are significantly different from each other in their mathematical background. Therefore, instead of a global evaluation metric for the complete methodology, each stage is evaluated within its evaluation metrics. In \textit{process model mining}, performance of process mining stage is measured by \textit{fitness} and \textit{appropriateness} which are defined in \cite{rozinat2008conformance}. In \textit{performance indicator analysis}, \textit{alignment costs} \cite{van2012replaying} are compared with process model mining metrics for replay phase. In clustering phase, \textit{within-SSE} analysis is undertaken to decide on the number of clusters. For \textit{mismatch pattern analysis}, number of mismatch patterns found are compared with the \textit{graph-edit similarity} \cite{dijkman2011similarity} of process models. In \textit{recommendation generation}, different threshold values are tried to check how many mismatch patterns are generated for organizations and how they could be used for focused analysis.
 
 \input{5_results_discussions/loan-application-process/loan-application-process.tex}
 \input{5_results_discussions/coselog-wabo/coselog-wabo.tex}
